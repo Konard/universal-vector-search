@@ -20,7 +20,7 @@ print(f"Model loaded in {model_load_time} seconds")
 start_time = time.time()
 
 # Define your predefined list of messages
-messages = ["Hello, my name is AI.", "Привет, меня зовут AI."]
+messages = ['Мне нравится играть в игры', 'Я люблю читать книги', 'I enjoy playing football', 'I like to read novels', "Hello, my name is AI.", "Привет, Мир!"]
 message_embeddings = embed(messages)
 
 # Print message embedding time
@@ -49,7 +49,7 @@ while True:
     # Ranks messages based on query
     ranked_messages = rank_messages(query)
     for message, score in ranked_messages:
-        print(f'Message: {message}, Similarity Score: {score}')
+        print(f'{score}: {message}')
 
     # Print query execution time
     query_time = time.time() - start_query_time
