@@ -40,4 +40,8 @@ The script will then:
 2. Start taking user input for queries to search the predefined set of messages. The messages are ranked by their relevance to the input query.
 3. To stop the script, simply press enter without typing anything when asked for a query. 
 
-It also measures and prints the time taken to both start up (load the model) and execute each input query.
+It also measures and prints the time taken to both start up (load the model and embedding) and execute each input query.
+
+Output to console may look like this:
+![Screenshot_20231214_105939](https://github.com/Konard/universal-vector-search/assets/1431904/a512c7ef-7ced-4bc8-b91a-791673b60fdd)
+
