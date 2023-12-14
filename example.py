@@ -5,27 +5,34 @@ import numpy as np
 from scipy.spatial import distance
 import time
 
-# Start measuring time
+# Start measuring time for loading model
 start_time = time.time()
 
 # Load the model
 print("Loading model...")
 embed = hub.load("https://tfhub.dev/google/universal-sentence-encoder-multilingual/3")
 
+# Print model loading time
+model_load_time = time.time() - start_time
+print(f"Model loaded in {model_load_time} seconds")
+
+# Start measuring time for embedding the messages
+start_time = time.time()
+
 # Define your predefined list of messages
 messages = ["Hello, my name is AI.", "Привет, меня зовут AI."]
 message_embeddings = embed(messages)
 
-# Print startup time
-startup_time = time.time() - start_time
-print(f"Model loaded in {startup_time} seconds")
+# Print message embedding time
+message_embedding_time = time.time() - start_time
+print(f"Messages embedded in {message_embedding_time} seconds")
 
 # Function to calculate cosine similarity
 def rank_messages(query):
     query_embedding = embed([query])
-    similarity_scores = 1 - distance.cdist(query_embedding, message_embeddings, "cosine")
-    ranked_indices = np.argsort(similarity_scores[0])[::-1]
-    ranked_messages = [messages[index] for index in ranked_indices]
+    similarity_scores = 1 - distance.cdist(query_embedding, message_embeddings, "cosine")[0]
+    ranked_indices = np.argsort(similarity_scores)[::-1]
+    ranked_messages = [(messages[index], similarity_scores[index]) for index in ranked_indices]
     return ranked_messages
 
 # Starts the loop to get queries
@@ -36,12 +43,13 @@ while True:
     if query == '':
         break
 
-    # Start measuring query execution time
+    # start measuring query execution time
     start_query_time = time.time()
 
     # Ranks messages based on query
     ranked_messages = rank_messages(query)
-    print('Ranked Messages:', ranked_messages)
+    for message, score in ranked_messages:
+        print(f'Message: {message}, Similarity Score: {score}')
 
     # Print query execution time
     query_time = time.time() - start_query_time
