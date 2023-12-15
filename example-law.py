@@ -29,6 +29,18 @@ file_path = 'articles.json'
 with open(file_path, 'r', encoding='utf-8') as file:
     messages = json.load(file)
 
+newline = '\n'
+
+# Attempt to use only titles
+# def only_titles(article):
+#     return article.partition(newline)[0]
+# messages = map(only_titles, messages)
+
+for index, message in enumerate(messages):
+    prepared_message = message.strip().lower()
+    parts = prepared_message.partition(newline)
+    messages[index] = parts[0] + '\n' + parts[1]
+
 message_embeddings = embed(messages)
 
 # Print message embedding time
@@ -53,8 +65,6 @@ while True:
 
     # start measuring query execution time
     start_query_time = time.time()
-
-    newline = '\n'
 
     # Ranks messages based on query
     ranked_messages = rank_messages(query)
