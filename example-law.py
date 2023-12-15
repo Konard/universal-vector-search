@@ -57,7 +57,7 @@ def rank_messages(query):
 
 # Starts the loop to get queries
 while True:
-    query = input("Enter the query (or press enter to exit): ")
+    query = input("Enter the query (or press enter to exit): ").lower()
 
     # breaks loop if enter is pressed
     if query == '':
