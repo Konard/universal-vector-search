@@ -68,7 +68,7 @@ while True:
 
     # Ranks messages based on query
     ranked_messages = rank_messages(query)
-    for message, score in ranked_messages[:10]:
+    for message, score in ranked_messages[:20]:
         print(f'{score}: {message.partition(newline)[0]}')
 
     # Print query execution time
