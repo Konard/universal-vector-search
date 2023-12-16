@@ -33,7 +33,7 @@ newline = '\n'
 
 for message in messages_dict:
     lines = message.split(newline)
-    lines = [line.lower().strip() for line in lines]
+    lines = [line.lower().strip() for line in lines if line.strip()]
     lines_embeddings = embed(lines)
     message_lines_embeddings[message] = lines_embeddings.numpy()
 
