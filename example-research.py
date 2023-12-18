@@ -20,7 +20,7 @@ print(f"Model loaded in {model_load_time} seconds")
 start_time = time.time()
 
 # Define your predefined list of messages
-messages = ['игра', 'книга', 'интеллект']
+messages = ['игра', 'книга', 'искусственный интеллект', 'коагуляция', "4000", "50000", "9999", "грабеж", "кража"]
 message_embeddings = embed(messages)
 
 # Print message embedding time
