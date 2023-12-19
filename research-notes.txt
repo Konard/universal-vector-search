@@ -1,0 +1,3 @@
+Use this regex to remove text that does not provide semantics to the article text:
+
+\\nнаказыва[ею]тся[^\\]+
