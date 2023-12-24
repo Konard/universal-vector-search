@@ -1,3 +1,5 @@
+[![Gitpod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/konard/universal-vector-search)
+
 # Universal Sentence Encoder Multilingual Vector Search Example
 This repository contains example code to demonstrate the use of the Universal Sentence Encoder Multilingual model for semantic search.
 
