@@ -106,8 +106,8 @@ newline = '\n'
 
 docs_words = [split_and_lower(message) for message in messages_dict]
 idf = compute_idf(docs_words)
-print('idf[кража]', idf['кража'])
-print('idf[грабеж]', idf['грабеж'])
+# print('idf[кража]', idf['кража'])
+# print('idf[грабеж]', idf['грабеж'])
 
 i = 0
 for words in docs_words:
@@ -130,8 +130,8 @@ for words in docs_words:
     doc_word_count_dict = make_doc_words_count_dict(words)
     term_frequency = compute_tf(doc_word_count_dict, words)
     tfidf = compute_tfidf(term_frequency, idf)
-    print('tfidf[кража]', tfidf.get('кража', None))
-    print('tfidf[грабеж]', tfidf.get('грабеж', None))
+    # print('tfidf[кража]', tfidf.get('кража', None))
+    # print('tfidf[грабеж]', tfidf.get('грабеж', None))
     # print('tfidf', tfidf)
 
     lines_embeddings = embed(words)
@@ -151,20 +151,19 @@ def rank_messages(query):
         similarity_scores = 1 - distance.cdist(query_embedding, lines_embeddings, "cosine")[0]
         # total_similarity_score = np.max(similarity_scores)
 
-        # i = 0
-        # for word in words:
-        #     importance = tfidf[word]
-        #     # print('word', word)
-        #     # print('importance', importance)
-        #     # print('similarity_score', similarity_scores[i])
-        #     similarity_scores[i] *= importance
-        #     # print('updated similarity_score', similarity_scores[i])
-        #     i += 1
-        
+        i = 0
+        for word in words:
+            importance = idf[word]
+            # print('word', word)
+            # print('importance', importance)
+            # print('similarity_score', similarity_scores[i])
+            similarity_scores[i] *= importance
+            # print('updated similarity_score', similarity_scores[i])
+            i += 1
+        total_similarity_score = np.max(similarity_scores)
+
         # word_index = [i for i, x in enumerate(similarity_scores) if x == total_similarity_score]
         # print(f'{total_similarity_score}: ', words[word_index[0]])
-            
-        total_similarity_score = np.max(similarity_scores)
 
         ranked_messages_scores[message] = total_similarity_score
 
